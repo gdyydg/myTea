@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mms.dao.CityDao">
+    <resultMap id="BaseResultMap" type="mms.entity.City">
+        <result column="id" property="id"/>
+        <result column="cityName" property="cityName"/>
+        <result column="description" property="description"/>
+    </resultMap>
+    <sql id="city_column">
+        id,cityName,description
+    </sql>
+    <!--保存一个城市-->
+    <insert id="saveCity" parameterType="mms.entity.City" useGeneratedKeys="true" keyProperty="id">
+        insert  into
+        city(id,cityName,description)
+        values
+        (#{id},#{cityName},#{description})
+    </insert>
+    <!--查询一个城市-->
+    <select id="selectCityById" parameterType="String" resultMap="BaseResultMap">
+        select
+        <include refid="city_column"/>
+        from city
+        where id = #{id}
+
+    </select>
+</mapper>
